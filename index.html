@@ -1,80 +1,167 @@
 <!DOCTYPE html>
-<html lang="ur" dir="ltr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>QuickSEO Tools — Free Online SEO &amp; Writing Utilities</title>
-<meta name="description" content="Free online SEO tools: word counter, keyword density checker, meta tag generator, case converter, slug generator and password generator.">
+<title>QuickSEO Tools — Free, Fun SEO &amp; Writing Utilities</title>
+<meta name="description" content="Free online SEO tools: word counter, keyword density checker, meta tag generator, case converter, slug generator and password generator. No signup, no uploads.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#16211b;
-    --paper:#f6f4ee;
-    --line:#d8d2c2;
-    --moss:#3c5a44;
-    --moss-dk:#294031;
-    --clay:#b5652c;
-    --card:#fffdf8;
+    --bg:#eef6f3;
+    --ink:#152a2b;
+    --sub:#4d6663;
+    --navy:#12324a;
+    --coral:#ff6f59;
+    --sun:#ffc23c;
+    --teal:#1fa38a;
+    --card:#ffffff;
+    --line:#dfeae6;
   }
   *{box-sizing:border-box;}
-  body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,'Times New Roman',serif;line-height:1.5;}
-  header{padding:2.2rem 1.2rem 1.4rem;text-align:center;border-bottom:1px solid var(--line);}
-  header h1{margin:0 0 .3rem;font-size:1.9rem;letter-spacing:.01em;}
-  header p{margin:0;color:#5a5747;font-family:Arial,Helvetica,sans-serif;font-size:.92rem;}
-  nav{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;padding:1rem;max-width:920px;margin:0 auto;}
-  nav button{font-family:Arial,Helvetica,sans-serif;font-size:.82rem;padding:.5rem .9rem;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:3px;cursor:pointer;}
-  nav button.active{background:var(--moss);color:#fff;border-color:var(--moss);}
-  main{max-width:720px;margin:0 auto;padding:0 1.2rem 3rem;}
-  .tool{display:none;background:var(--card);border:1px solid var(--line);border-radius:4px;padding:1.4rem;margin-top:.5rem;}
-  .tool.active{display:block;}
-  .tool h2{margin:0 0 .6rem;font-size:1.25rem;}
-  .tool p.hint{font-family:Arial,Helvetica,sans-serif;font-size:.85rem;color:#5a5747;margin:.2rem 0 1rem;}
-  textarea,input[type=text],input[type=number],select{
-    width:100%;font-family:Arial,Helvetica,sans-serif;font-size:.95rem;padding:.6rem;
-    border:1px solid var(--line);border-radius:3px;background:#fff;color:var(--ink);
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Nunito',Arial,sans-serif;line-height:1.6;}
+  h1,h2,h3{font-family:'Baloo 2',cursive;margin:0;}
+
+  .hero{background:linear-gradient(160deg,var(--navy) 0%,#1a4a63 100%);color:#fff;padding:3rem 1.3rem 2.6rem;text-align:center;border-radius:0 0 28px 28px;}
+  .hero .emoji{font-size:2.6rem;display:block;margin-bottom:.4rem;}
+  .hero h1{font-size:2.1rem;color:#fff;margin-bottom:.5rem;}
+  .hero p{max-width:480px;margin:0 auto;color:#cfe6df;font-size:1rem;}
+  .hero .tags{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:1.1rem;}
+  .hero .tags span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:.35rem .8rem;border-radius:999px;font-size:.78rem;}
+
+  nav.crumbs{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;padding:1.1rem 1rem .3rem;}
+  nav.crumbs a{color:var(--navy);text-decoration:none;font-weight:700;font-size:.85rem;padding:.45rem .9rem;background:var(--card);border:2px solid var(--line);border-radius:999px;}
+  nav.crumbs a:hover{border-color:var(--teal);}
+
+  main{max-width:760px;margin:0 auto;padding:1rem 1.2rem 3rem;}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.8rem;margin:1.6rem 0 2.2rem;}
+  .grid button.card-btn{
+    all:unset;cursor:pointer;background:var(--card);border:2px solid var(--line);border-radius:16px;
+    padding:1rem .8rem;text-align:center;transition:transform .12s ease, border-color .12s ease;
   }
-  textarea{min-height:130px;resize:vertical;}
-  label{display:block;font-family:Arial,Helvetica,sans-serif;font-size:.8rem;color:#5a5747;margin:.7rem 0 .25rem;}
-  button.run{font-family:Arial,Helvetica,sans-serif;margin-top:1rem;background:var(--clay);color:#fff;border:none;padding:.6rem 1.2rem;border-radius:3px;cursor:pointer;font-size:.9rem;}
-  button.run:hover{background:#9a5423;}
-  .out{margin-top:1rem;padding:.9rem;background:#f1efe5;border-radius:3px;font-family:Arial,Helvetica,sans-serif;font-size:.88rem;white-space:pre-wrap;word-break:break-word;}
-  .stats{display:flex;flex-wrap:wrap;gap:1.2rem;font-family:Arial,Helvetica,sans-serif;font-size:.85rem;margin-top:.8rem;}
-  .stats div b{display:block;font-size:1.3rem;color:var(--moss-dk);font-family:Georgia,serif;}
-  footer{text-align:center;font-family:Arial,Helvetica,sans-serif;font-size:.78rem;color:#847f6a;padding:1.5rem;border-top:1px solid var(--line);}
+  .grid button.card-btn:hover{transform:translateY(-3px);border-color:var(--teal);}
+  .grid button.card-btn.active{border-color:var(--coral);background:#fff4f1;}
+  .grid .ic{font-size:1.6rem;display:block;margin-bottom:.35rem;}
+  .grid .lb{font-weight:700;font-size:.85rem;color:var(--navy);font-family:'Baloo 2',cursive;}
+
+  section.intro{margin-bottom:1.6rem;}
+  section.intro h2{font-size:1.5rem;color:var(--navy);margin-bottom:.5rem;}
+  section.intro p{color:var(--sub);}
+
+  .tool{display:none;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:1.5rem;margin-top:.5rem;}
+  .tool.active{display:block;animation:pop .25s ease;}
+  @keyframes pop{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  .tool h2{font-size:1.4rem;color:var(--navy);margin-bottom:.3rem;}
+  .tool .emoji-h{font-size:1.4rem;margin-right:.3rem;}
+  .tool p.hint{font-size:.9rem;color:var(--sub);margin:.2rem 0 1rem;}
+
+  textarea,input[type=text],input[type=number],select{
+    width:100%;font-family:'Nunito',Arial,sans-serif;font-size:1rem;padding:.7rem .8rem;
+    border:2px solid var(--line);border-radius:10px;background:#fbfdfc;color:var(--ink);
+  }
+  textarea:focus,input:focus{outline:none;border-color:var(--teal);}
+  textarea{min-height:140px;resize:vertical;}
+  label{display:block;font-weight:700;font-size:.82rem;color:var(--navy);margin:.8rem 0 .3rem;}
+
+  button.run{font-family:'Baloo 2',cursive;margin-top:1.1rem;background:var(--coral);color:#fff;border:none;
+    padding:.7rem 1.3rem;border-radius:999px;cursor:pointer;font-size:1rem;font-weight:700;box-shadow:0 3px 0 #d84e3c;}
+  button.run:active{transform:translateY(2px);box-shadow:0 1px 0 #d84e3c;}
+  button.run:hover{background:#ff8368;}
+
+  .out{margin-top:1.1rem;padding:1rem;background:#f3faf8;border:1px dashed var(--teal);border-radius:10px;
+    font-family:monospace;font-size:.88rem;white-space:pre-wrap;word-break:break-word;}
+
+  .stats{display:flex;flex-wrap:wrap;gap:1rem;margin-top:1rem;}
+  .stats div{background:#f3faf8;border-radius:12px;padding:.7rem 1rem;flex:1;min-width:110px;text-align:center;}
+  .stats div b{display:block;font-size:1.5rem;color:var(--teal);font-family:'Baloo 2',cursive;}
+  .stats div small{color:var(--sub);font-size:.75rem;}
+
   .row{display:flex;gap:.6rem;flex-wrap:wrap;}
   .row > *{flex:1;min-width:120px;}
+
+  section.why{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:1.4rem;margin-top:2rem;}
+  section.why h3{color:var(--navy);font-size:1.2rem;margin-bottom:.6rem;}
+  section.why ul{margin:0;padding-left:1.2rem;color:var(--sub);}
+  section.why li{margin-bottom:.5rem;}
+
+  footer{text-align:center;font-size:.8rem;color:var(--sub);padding:1.8rem;}
+  footer a{color:var(--teal);}
 </style>
 </head>
 <body>
 
-<header>
+<div class="hero">
+  <span class="emoji">✨🔍</span>
   <h1>QuickSEO Tools</h1>
-  <p>Free browser-based tools for bloggers &amp; SEO — no signup, nothing uploaded anywhere</p>
-</header>
+  <p>Six free, fun little tools that make blogging and SEO less annoying — all running right in your browser, nothing uploaded, nothing to sign up for.</p>
+  <div class="tags">
+    <span>🆓 100% free</span>
+    <span>⚡ instant</span>
+    <span>🔒 private</span>
+  </div>
+</div>
 
-<nav style="font-family:Arial,Helvetica,sans-serif;font-size:.85rem;">
-  <a href="index.html" style="color:var(--moss-dk);text-decoration:none;padding:.4rem .7rem;border:1px solid var(--line);border-radius:3px;">Tools</a>
-  <a href="blog.html" style="color:var(--moss-dk);text-decoration:none;padding:.4rem .7rem;border:1px solid var(--line);border-radius:3px;">Blog</a>
-  <a href="about.html" style="color:var(--moss-dk);text-decoration:none;padding:.4rem .7rem;border:1px solid var(--line);border-radius:3px;">About</a>
-  <a href="contact.html" style="color:var(--moss-dk);text-decoration:none;padding:.4rem .7rem;border:1px solid var(--line);border-radius:3px;">Contact</a>
-  <a href="privacy.html" style="color:var(--moss-dk);text-decoration:none;padding:.4rem .7rem;border:1px solid var(--line);border-radius:3px;">Privacy Policy</a>
+<nav class="crumbs">
+  <a href="index.html">🧰 Tools</a>
+  <a href="blog.html">📝 Blog</a>
+  <a href="about.html">👋 About</a>
+  <a href="contact.html">✉️ Contact</a>
+  <a href="privacy.html">🔐 Privacy</a>
 </nav>
-<nav id="nav"></nav>
-<main id="main"></main>
+
+<main>
+  <section class="intro">
+    <h2>Pick a tool below 👇</h2>
+    <p>Tap a card to open the tool. Everything updates instantly as you type — no "submit" button hunting, no ads blocking your text box.</p>
+  </section>
+
+  <div class="grid" id="nav"></div>
+  <div id="main"></div>
+
+  <section class="why">
+    <h3>Why this exists</h3>
+    <ul>
+      <li><strong>No signup fatigue.</strong> Most "free" SEO tools want your email before they show you anything. These don't.</li>
+      <li><strong>Nothing leaves your browser.</strong> Your draft, your keywords — all processed with plain JavaScript on your device.</li>
+      <li><strong>Built for real writing sessions.</strong> Word counts, meta lengths and slugs are the small checks you do a dozen times a day — this page keeps them one tap away.</li>
+    </ul>
+  </section>
+
+  <section class="why">
+    <h3>How each tool actually helps</h3>
+    <ul>
+      <li><strong>Word &amp; Character Counter</strong> — tells you instantly if a draft is too thin to compete, or long enough to fully answer a reader's question.</li>
+      <li><strong>Keyword Density Checker</strong> — flags when one phrase is repeated so often that a post starts to read unnaturally, which hurts readability more than it helps rankings.</li>
+      <li><strong>Meta Title &amp; Description Checker</strong> — Google cuts off titles past ~60 characters and descriptions past ~155; this stops you finding out the hard way, after publishing.</li>
+      <li><strong>Case Converter</strong> — quick fix for headings pasted in the wrong case, or code snippets that need consistent casing.</li>
+      <li><strong>Slug Generator</strong> — clean, lowercase, hyphenated URLs are easier to read and slightly friendlier for search engines than messy auto-generated ones.</li>
+      <li><strong>Password Generator</strong> — a strong, random password for your CMS or hosting login, generated locally so it's never sent anywhere.</li>
+    </ul>
+  </section>
+
+  <section class="why">
+    <h3>Frequently asked questions</h3>
+    <p><strong>Is this really free, forever?</strong><br>Yes — every tool runs as plain JavaScript in your browser, so there's no server cost tied to your usage and no reason to ever put these behind a paywall.</p>
+    <p><strong>Do you store what I type?</strong><br>No. Nothing you type into any tool is uploaded, logged, or saved anywhere — it disappears the moment you close or refresh the page.</p>
+    <p><strong>Why does my keyword density look different from other checkers?</strong><br>Different tools use different stop-word lists (common words like "the" and "and" that get ignored). This one excludes short common words before calculating percentages, which can shift the numbers slightly from other tools.</p>
+    <p><strong>Can I suggest a new tool?</strong><br>Yes — reach out via the <a href="contact.html">contact page</a> with what you'd find useful.</p>
+  </section>
+</main>
 
 <footer>
-  © <span id="yr"></span> QuickSEO Tools — everything runs in your browser.
+  Made with 🧡 by Hasnat · <a href="about.html">About</a> · <a href="privacy.html">Privacy</a> · <a href="contact.html">Contact</a>
 </footer>
 
 <script>
-document.getElementById('yr').textContent = new Date().getFullYear();
-
 const tools = [
-  {id:'words', label:'Word Counter'},
-  {id:'density', label:'Keyword Density'},
-  {id:'meta', label:'Meta Tag Checker'},
-  {id:'case', label:'Case Converter'},
-  {id:'slug', label:'Slug Generator'},
-  {id:'password', label:'Password Generator'}
+  {id:'words', label:'Word Counter', icon:'🔢'},
+  {id:'density', label:'Keyword Density', icon:'🌡️'},
+  {id:'meta', label:'Meta Checker', icon:'🏷️'},
+  {id:'case', label:'Case Converter', icon:'🔤'},
+  {id:'slug', label:'Slug Generator', icon:'🔗'},
+  {id:'password', label:'Password Gen', icon:'🔑'}
 ];
 
 const nav = document.getElementById('nav');
@@ -82,14 +169,15 @@ const main = document.getElementById('main');
 
 tools.forEach(t=>{
   const b = document.createElement('button');
-  b.textContent = t.label;
-  b.onclick = ()=>show(t.id);
+  b.className = 'card-btn';
   b.id = 'nav-'+t.id;
+  b.innerHTML = `<span class="ic">${t.icon}</span><span class="lb">${t.label}</span>`;
+  b.onclick = ()=>show(t.id);
   nav.appendChild(b);
 });
 
 function show(id){
-  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.card-btn').forEach(b=>b.classList.remove('active'));
   document.querySelectorAll('.tool').forEach(t=>t.classList.remove('active'));
   document.getElementById('nav-'+id).classList.add('active');
   document.getElementById('tool-'+id).classList.add('active');
@@ -97,28 +185,28 @@ function show(id){
 
 main.innerHTML = `
 <section class="tool" id="tool-words">
-  <h2>Word &amp; Character Counter</h2>
-  <p class="hint">Paste your blog draft to check length before publishing.</p>
+  <h2><span class="emoji-h">🔢</span>Word &amp; Character Counter</h2>
+  <p class="hint">Paste your blog draft to check length before publishing — most SEO-friendly posts land between 800 and 1,500 words.</p>
   <textarea id="wc-input" oninput="wcRun()" placeholder="Paste your text here..."></textarea>
   <div class="stats">
-    <div><b id="wc-words">0</b>Words</div>
-    <div><b id="wc-chars">0</b>Characters</div>
-    <div><b id="wc-sent">0</b>Sentences</div>
-    <div><b id="wc-read">0 min</b>Read time</div>
+    <div><b id="wc-words">0</b><small>Words</small></div>
+    <div><b id="wc-chars">0</b><small>Characters</small></div>
+    <div><b id="wc-sent">0</b><small>Sentences</small></div>
+    <div><b id="wc-read">0 min</b><small>Read time</small></div>
   </div>
 </section>
 
 <section class="tool" id="tool-density">
-  <h2>Keyword Density Checker</h2>
-  <p class="hint">See how often each word repeats — useful for spotting keyword stuffing.</p>
+  <h2><span class="emoji-h">🌡️</span>Keyword Density Checker</h2>
+  <p class="hint">See how often each word repeats — a quick way to spot accidental keyword stuffing before you hit publish.</p>
   <textarea id="kd-input" placeholder="Paste your article text here..."></textarea>
-  <button class="run" onclick="kdRun()">Check density</button>
+  <button class="run" onclick="kdRun()">Check density 🔍</button>
   <div class="out" id="kd-out"></div>
 </section>
 
 <section class="tool" id="tool-meta">
-  <h2>Meta Title &amp; Description Checker</h2>
-  <p class="hint">Google truncates long titles/descriptions — check your length fits.</p>
+  <h2><span class="emoji-h">🏷️</span>Meta Title &amp; Description Checker</h2>
+  <p class="hint">Google truncates long titles and descriptions in search results — check yours fit before they get cut off.</p>
   <label>Page title</label>
   <input type="text" id="mt-title" oninput="mtRun()" placeholder="Your SEO title">
   <div class="out" id="mt-title-out" style="margin-top:.4rem;"></div>
@@ -128,35 +216,35 @@ main.innerHTML = `
 </section>
 
 <section class="tool" id="tool-case">
-  <h2>Case Converter</h2>
-  <p class="hint">Convert text for headings, titles or code.</p>
+  <h2><span class="emoji-h">🔤</span>Case Converter</h2>
+  <p class="hint">Convert text for headings, titles, or code snippets in one tap.</p>
   <textarea id="cc-input" placeholder="Type or paste text..."></textarea>
   <div class="row">
-    <button class="run" onclick="ccRun('upper')">UPPERCASE</button>
-    <button class="run" onclick="ccRun('lower')">lowercase</button>
+    <button class="run" onclick="ccRun('upper')">UPPER</button>
+    <button class="run" onclick="ccRun('lower')">lower</button>
     <button class="run" onclick="ccRun('title')">Title Case</button>
-    <button class="run" onclick="ccRun('sentence')">Sentence case</button>
+    <button class="run" onclick="ccRun('sentence')">Sentence</button>
   </div>
   <div class="out" id="cc-out"></div>
 </section>
 
 <section class="tool" id="tool-slug">
-  <h2>URL Slug Generator</h2>
-  <p class="hint">Turn a blog title into a clean, SEO-friendly URL slug.</p>
+  <h2><span class="emoji-h">🔗</span>URL Slug Generator</h2>
+  <p class="hint">Turn a blog title into a clean, SEO-friendly URL slug — lowercase, hyphenated, no junk characters.</p>
   <input type="text" id="sg-input" oninput="sgRun()" placeholder="e.g. 10 Best Free SEO Tools in 2026">
   <div class="out" id="sg-out"></div>
 </section>
 
 <section class="tool" id="tool-password">
-  <h2>Password Generator</h2>
-  <p class="hint">Generate a strong password for your CMS or hosting login.</p>
+  <h2><span class="emoji-h">🔑</span>Password Generator</h2>
+  <p class="hint">Generate a strong, random password for your CMS or hosting login.</p>
   <label>Length: <span id="pw-len-val">16</span></label>
   <input type="range" id="pw-len" min="6" max="40" value="16" oninput="document.getElementById('pw-len-val').textContent=this.value">
   <div class="row" style="margin-top:.6rem;">
-    <label style="display:flex;align-items:center;gap:.4rem;"><input type="checkbox" id="pw-sym" checked> Symbols</label>
-    <label style="display:flex;align-items:center;gap:.4rem;"><input type="checkbox" id="pw-num" checked> Numbers</label>
+    <label style="display:flex;align-items:center;gap:.4rem;"><input type="checkbox" id="pw-sym" checked style="width:auto;"> Symbols</label>
+    <label style="display:flex;align-items:center;gap:.4rem;"><input type="checkbox" id="pw-num" checked style="width:auto;"> Numbers</label>
   </div>
-  <button class="run" onclick="pwRun()">Generate password</button>
+  <button class="run" onclick="pwRun()">Generate 🎲</button>
   <div class="out" id="pw-out"></div>
 </section>
 `;
@@ -198,8 +286,8 @@ function mtRun(){
   const desc = document.getElementById('mt-desc').value;
   const tOut = document.getElementById('mt-title-out');
   const dOut = document.getElementById('mt-desc-out');
-  tOut.textContent = title.length+' / 60 characters'+(title.length>60?'  ⚠ likely to be truncated in Google search results':'  ✓ good length');
-  dOut.textContent = desc.length+' / 155 characters'+(desc.length>155?'  ⚠ likely to be truncated in Google search results':'  ✓ good length');
+  tOut.textContent = title.length+' / 60 characters'+(title.length>60?'  ⚠ likely truncated in Google search results':'  ✓ good length');
+  dOut.textContent = desc.length+' / 155 characters'+(desc.length>155?'  ⚠ likely truncated in Google search results':'  ✓ good length');
 }
 
 // Case converter
