@@ -1,1 +1,237 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QuickSEO Tools — Free Online SEO &amp; Writing Utilities</title>
+<meta name="description" content="Free online SEO tools: word counter, keyword density checker, meta tag generator, case converter, slug generator and password generator.">
+<style>
+  :root{
+    --ink:#16211b;
+    --paper:#f6f4ee;
+    --line:#d8d2c2;
+    --moss:#3c5a44;
+    --moss-dk:#294031;
+    --clay:#b5652c;
+    --card:#fffdf8;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,'Times New Roman',serif;line-height:1.5;}
+  header{padding:2.2rem 1.2rem 1.4rem;text-align:center;border-bottom:1px solid var(--line);}
+  header h1{margin:0 0 .3rem;font-size:1.9rem;letter-spacing:.01em;}
+  header p{margin:0;color:#5a5747;font-family:Arial,Helvetica,sans-serif;font-size:.92rem;}
+  nav{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;padding:1rem;max-width:920px;margin:0 auto;}
+  nav button{font-family:Arial,Helvetica,sans-serif;font-size:.82rem;padding:.5rem .9rem;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:3px;cursor:pointer;}
+  nav button.active{background:var(--moss);color:#fff;border-color:var(--moss);}
+  main{max-width:720px;margin:0 auto;padding:0 1.2rem 3rem;}
+  .tool{display:none;background:var(--card);border:1px solid var(--line);border-radius:4px;padding:1.4rem;margin-top:.5rem;}
+  .tool.active{display:block;}
+  .tool h2{margin:0 0 .6rem;font-size:1.25rem;}
+  .tool p.hint{font-family:Arial,Helvetica,sans-serif;font-size:.85rem;color:#5a5747;margin:.2rem 0 1rem;}
+  textarea,input[type=text],input[type=number],select{
+    width:100%;font-family:Arial,Helvetica,sans-serif;font-size:.95rem;padding:.6rem;
+    border:1px solid var(--line);border-radius:3px;background:#fff;color:var(--ink);
+  }
+  textarea{min-height:130px;resize:vertical;}
+  label{display:block;font-family:Arial,Helvetica,sans-serif;font-size:.8rem;color:#5a5747;margin:.7rem 0 .25rem;}
+  button.run{font-family:Arial,Helvetica,sans-serif;margin-top:1rem;background:var(--clay);color:#fff;border:none;padding:.6rem 1.2rem;border-radius:3px;cursor:pointer;font-size:.9rem;}
+  button.run:hover{background:#9a5423;}
+  .out{margin-top:1rem;padding:.9rem;background:#f1efe5;border-radius:3px;font-family:Arial,Helvetica,sans-serif;font-size:.88rem;white-space:pre-wrap;word-break:break-word;}
+  .stats{display:flex;flex-wrap:wrap;gap:1.2rem;font-family:Arial,Helvetica,sans-serif;font-size:.85rem;margin-top:.8rem;}
+  .stats div b{display:block;font-size:1.3rem;color:var(--moss-dk);font-family:Georgia,serif;}
+  footer{text-align:center;font-family:Arial,Helvetica,sans-serif;font-size:.78rem;color:#847f6a;padding:1.5rem;border-top:1px solid var(--line);}
+  .row{display:flex;gap:.6rem;flex-wrap:wrap;}
+  .row > *{flex:1;min-width:120px;}
+</style>
+</head>
+<body>
 
+<header>
+  <h1>QuickSEO Tools</h1>
+  <p>Free browser-based tools for bloggers &amp; SEO — no signup, nothing uploaded anywhere</p>
+</header>
+
+<nav id="nav"></nav>
+<main id="main"></main>
+
+<footer>
+  © <span id="yr"></span> QuickSEO Tools — everything runs in your browser. Replace this footer with your own site name, About/Privacy/Contact links before publishing.
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+const tools = [
+  {id:'words', label:'Word Counter'},
+  {id:'density', label:'Keyword Density'},
+  {id:'meta', label:'Meta Tag Checker'},
+  {id:'case', label:'Case Converter'},
+  {id:'slug', label:'Slug Generator'},
+  {id:'password', label:'Password Generator'}
+];
+
+const nav = document.getElementById('nav');
+const main = document.getElementById('main');
+
+tools.forEach(t=>{
+  const b = document.createElement('button');
+  b.textContent = t.label;
+  b.onclick = ()=>show(t.id);
+  b.id = 'nav-'+t.id;
+  nav.appendChild(b);
+});
+
+function show(id){
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tool').forEach(t=>t.classList.remove('active'));
+  document.getElementById('nav-'+id).classList.add('active');
+  document.getElementById('tool-'+id).classList.add('active');
+}
+
+main.innerHTML = `
+<section class="tool" id="tool-words">
+  <h2>Word &amp; Character Counter</h2>
+  <p class="hint">Paste your blog draft to check length before publishing.</p>
+  <textarea id="wc-input" oninput="wcRun()" placeholder="Paste your text here..."></textarea>
+  <div class="stats">
+    <div><b id="wc-words">0</b>Words</div>
+    <div><b id="wc-chars">0</b>Characters</div>
+    <div><b id="wc-sent">0</b>Sentences</div>
+    <div><b id="wc-read">0 min</b>Read time</div>
+  </div>
+</section>
+
+<section class="tool" id="tool-density">
+  <h2>Keyword Density Checker</h2>
+  <p class="hint">See how often each word repeats — useful for spotting keyword stuffing.</p>
+  <textarea id="kd-input" placeholder="Paste your article text here..."></textarea>
+  <button class="run" onclick="kdRun()">Check density</button>
+  <div class="out" id="kd-out"></div>
+</section>
+
+<section class="tool" id="tool-meta">
+  <h2>Meta Title &amp; Description Checker</h2>
+  <p class="hint">Google truncates long titles/descriptions — check your length fits.</p>
+  <label>Page title</label>
+  <input type="text" id="mt-title" oninput="mtRun()" placeholder="Your SEO title">
+  <div class="out" id="mt-title-out" style="margin-top:.4rem;"></div>
+  <label>Meta description</label>
+  <textarea id="mt-desc" oninput="mtRun()" placeholder="Your meta description"></textarea>
+  <div class="out" id="mt-desc-out"></div>
+</section>
+
+<section class="tool" id="tool-case">
+  <h2>Case Converter</h2>
+  <p class="hint">Convert text for headings, titles or code.</p>
+  <textarea id="cc-input" placeholder="Type or paste text..."></textarea>
+  <div class="row">
+    <button class="run" onclick="ccRun('upper')">UPPERCASE</button>
+    <button class="run" onclick="ccRun('lower')">lowercase</button>
+    <button class="run" onclick="ccRun('title')">Title Case</button>
+    <button class="run" onclick="ccRun('sentence')">Sentence case</button>
+  </div>
+  <div class="out" id="cc-out"></div>
+</section>
+
+<section class="tool" id="tool-slug">
+  <h2>URL Slug Generator</h2>
+  <p class="hint">Turn a blog title into a clean, SEO-friendly URL slug.</p>
+  <input type="text" id="sg-input" oninput="sgRun()" placeholder="e.g. 10 Best Free SEO Tools in 2026">
+  <div class="out" id="sg-out"></div>
+</section>
+
+<section class="tool" id="tool-password">
+  <h2>Password Generator</h2>
+  <p class="hint">Generate a strong password for your CMS or hosting login.</p>
+  <label>Length: <span id="pw-len-val">16</span></label>
+  <input type="range" id="pw-len" min="6" max="40" value="16" oninput="document.getElementById('pw-len-val').textContent=this.value">
+  <div class="row" style="margin-top:.6rem;">
+    <label style="display:flex;align-items:center;gap:.4rem;"><input type="checkbox" id="pw-sym" checked> Symbols</label>
+    <label style="display:flex;align-items:center;gap:.4rem;"><input type="checkbox" id="pw-num" checked> Numbers</label>
+  </div>
+  <button class="run" onclick="pwRun()">Generate password</button>
+  <div class="out" id="pw-out"></div>
+</section>
+`;
+
+// Word counter
+function wcRun(){
+  const t = document.getElementById('wc-input').value;
+  const words = t.trim() ? t.trim().split(/\s+/).length : 0;
+  const chars = t.length;
+  const sent = (t.match(/[.!?]+/g)||[]).length;
+  const read = Math.max(1, Math.round(words/200));
+  document.getElementById('wc-words').textContent = words;
+  document.getElementById('wc-chars').textContent = chars;
+  document.getElementById('wc-sent').textContent = sent;
+  document.getElementById('wc-read').textContent = read+' min';
+}
+
+// Keyword density
+function kdRun(){
+  const t = document.getElementById('kd-input').value.toLowerCase();
+  const words = t.match(/[a-z0-9']+/g) || [];
+  const stop = new Set(['the','is','in','at','of','a','and','to','for','on','with','as','it','this','that','are','was','be','by','an','or']);
+  const freq = {};
+  let total = 0;
+  words.forEach(w=>{ if(!stop.has(w) && w.length>2){ freq[w]=(freq[w]||0)+1; total++; } });
+  const top = Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  let out = 'Total analyzed words: '+total+'\n\n';
+  if(top.length===0){ out += 'No repeated keywords found.'; }
+  top.forEach(([w,c])=>{
+    const pct = ((c/total)*100).toFixed(1);
+    out += w.padEnd(18)+c+'x  ('+pct+'%)\n';
+  });
+  document.getElementById('kd-out').textContent = out;
+}
+
+// Meta checker
+function mtRun(){
+  const title = document.getElementById('mt-title').value;
+  const desc = document.getElementById('mt-desc').value;
+  const tOut = document.getElementById('mt-title-out');
+  const dOut = document.getElementById('mt-desc-out');
+  tOut.textContent = title.length+' / 60 characters'+(title.length>60?'  ⚠ likely to be truncated in Google search results':'  ✓ good length');
+  dOut.textContent = desc.length+' / 155 characters'+(desc.length>155?'  ⚠ likely to be truncated in Google search results':'  ✓ good length');
+}
+
+// Case converter
+function ccRun(mode){
+  const t = document.getElementById('cc-input').value;
+  let out = t;
+  if(mode==='upper') out = t.toUpperCase();
+  if(mode==='lower') out = t.toLowerCase();
+  if(mode==='title') out = t.toLowerCase().replace(/\b\w/g, c=>c.toUpperCase());
+  if(mode==='sentence') out = t.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g, c=>c.toUpperCase());
+  document.getElementById('cc-out').textContent = out;
+}
+
+// Slug generator
+function sgRun(){
+  const t = document.getElementById('sg-input').value;
+  const slug = t.toLowerCase().trim()
+    .replace(/[^a-z0-9\s-]/g,'')
+    .replace(/\s+/g,'-')
+    .replace(/-+/g,'-');
+  document.getElementById('sg-out').textContent = slug || '(type a title above)';
+}
+
+// Password generator
+function pwRun(){
+  const len = +document.getElementById('pw-len').value;
+  const sym = document.getElementById('pw-sym').checked;
+  const num = document.getElementById('pw-num').checked;
+  let chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if(num) chars += '0123456789';
+  if(sym) chars += '!@#$%^&*()_+-=[]{}';
+  let pw = '';
+  const arr = new Uint32Array(len);
+  crypto.getRandomValues(arr);
+  for(let i=0;i<len;i++){ pw += chars[arr[i]%chars.length]; }
+  document.getElementById('pw-out').textContent = pw;
+}
+
+show('words');
+</script>
+</body>
+</html>
