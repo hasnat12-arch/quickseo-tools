@@ -1,1 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Word Counter & Character Counter Online | QuickSEO Tools</title>
+<meta name="description" content="Free online word counter and character counter. Count words, characters, sentences and estimated reading time instantly with QuickSEO Tools.">
+<link rel="canonical" href="https://hasnat12-arch.github.io/quickseo-tools/word-counter.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Word Counter & Character Counter Online | QuickSEO Tools">
+<meta property="og:description" content="Count words, characters, sentences and reading time instantly. Free, private and no signup required.">
+<meta property="og:url" content="https://hasnat12-arch.github.io/quickseo-tools/word-counter.html">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Free Word Counter & Character Counter Online",
+  "url": "https://hasnat12-arch.github.io/quickseo-tools/word-counter.html",
+  "description": "Free online word counter and character counter for counting words, characters, sentences and estimated reading time."
+}
+</script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f7f7f7;color:#222;font-family:Arial,sans-serif}
+header{background:#171717;color:#fff;padding:22px 16px}
+nav{max-width:900px;margin:auto;display:flex;gap:18px;flex-wrap:wrap}
+nav a{color:#fff;text-decoration:none;font-weight:700}
+main{max-width:900px;margin:35px auto;padding:0 16px}
+h1{font-size:clamp(32px,6vw,52px);margin:0 0 12px}
+h2{margin-top:38px}
+.lead{font-size:18px;line-height:1.6;color:#555}
+.tool{background:#fff;border-radius:16px;padding:22px;box-shadow:0 4px 18px rgba(0,0,0,.08)}
+textarea{width:100%;min-height:260px;padding:16px;border:1px solid #ccc;border-radius:12px;font-size:16px;resize:vertical}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.stat{background:#f1f1f1;border-radius:12px;padding:16px;text-align:center}
+.stat b{display:block;font-size:28px}
+.stat small{color:#666}
+.content{line-height:1.7;color:#444}
+footer{max-width:900px;margin:40px auto;padding:20px 16px;color:#666}
+footer a{color:inherit}
+@media(max-width:650px){.stats{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<header>
+<nav>
+<a href="index.html">🧰 Tools</a>
+<a href="blog.html">📝 Blog</a>
+<a href="about.html">👋 About</a>
+<a href="contact.html">✉️ Contact</a>
+<a href="privacy.html">🔐 Privacy</a>
+</nav>
+</header>
 
+<main>
+<h1>Free Word Counter &amp; Character Counter</h1>
+<p class="lead">Count words, characters, sentences and estimated reading time instantly. Your text is processed in your browser.</p>
+
+<section class="tool">
+<textarea id="wc-input" oninput="wcRun()" placeholder="Paste or type your text here..."></textarea>
+<div class="stats">
+<div class="stat"><b id="wc-words">0</b><small>Words</small></div>
+<div class="stat"><b id="wc-chars">0</b><small>Characters</small></div>
+<div class="stat"><b id="wc-sent">0</b><small>Sentences</small></div>
+<div class="stat"><b id="wc-read">0 min</b><small>Read time</small></div>
+</div>
+</section>
+
+<section class="content">
+<h2>What is a word counter?</h2>
+<p>A word counter measures how many words are in your text. It is useful for blog posts, articles, assignments, social media content and SEO writing.</p>
+
+<h2>How does this word counter work?</h2>
+<p>Type or paste text into the box above. The tool counts words, characters and sentences automatically and estimates reading time at about 200 words per minute.</p>
+
+<h2>Is my text stored?</h2>
+<p>No. This page uses JavaScript in your browser to calculate the results. Your text is not uploaded to a server by the word counter.</p>
+
+<h2>Use QuickSEO Tools</h2>
+<p>Need more SEO utilities? Visit the <a href="index.html">QuickSEO Tools homepage</a> for keyword density, meta checking, case conversion, slug generation and password generation.</p>
+</section>
+</main>
+
+<footer>
+Made with 🧡 by Hasnat · <a href="about.html">About</a> · <a href="privacy.html">Privacy</a> · <a href="contact.html">Contact</a>
+</footer>
+
+<script>
+function wcRun(){
+  const t = document.getElementById('wc-input').value;
+  const words = t.trim() ? t.trim().split(/\s+/).length : 0;
+  const chars = t.length;
+  const sent = (t.match(/[.!?]+/g)||[]).length;
+  const read = Math.max(1, Math.round(words/200));
+  document.getElementById('wc-words').textContent = words;
+  document.getElementById('wc-chars').textContent = chars;
+  document.getElementById('wc-sent').textContent = sent;
+  document.getElementById('wc-read').textContent = read+' min';
+}
+</script>
+</body>
+</html>
