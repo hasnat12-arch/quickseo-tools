@@ -1,31 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
   <url>
-    <loc>https://hasnat12-arch.github.io/quickseo-tools/word-counter.html</loc>
+    <loc>https://hasnat12-arch.github.io/quickseo-tools/</loc>
   </url>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
     <loc>https://hasnat12-arch.github.io/quickseo-tools/word-counter.html</loc>
   </url>
 
-  <url>
-    <loc>https://hasnat12-arch.github.io/quickseo-tools/</loc>
-  </url>
-    <loc>https://hasnat12-arch.github.io/quickseo-tools/</loc>
-  </url>
   <url>
     <loc>https://hasnat12-arch.github.io/quickseo-tools/blog.html</loc>
   </url>
+
   <url>
     <loc>https://hasnat12-arch.github.io/quickseo-tools/about.html</loc>
   </url>
+
   <url>
     <loc>https://hasnat12-arch.github.io/quickseo-tools/contact.html</loc>
   </url>
+
   <url>
     <loc>https://hasnat12-arch.github.io/quickseo-tools/privacy.html</loc>
   </url>
+
 </urlset>
