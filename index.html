@@ -974,3 +974,74 @@ function mtRun(){
 
   const tOut =
     document.getElementById('mt-title-out');
+      const dOut =
+      document.getElementById('mt-desc-out');
+
+    tOut.textContent =
+      title.length + ' / 60 characters' +
+      (title.length > 60
+        ? ' ⚠ likely truncated in Google search results'
+        : ' ✓ good length');
+
+    dOut.textContent =
+      desc.length + ' / 155 characters' +
+      (desc.length > 155
+        ? ' ⚠ likely truncated in Google search results'
+        : ' ✓ good length');
+}
+
+// Case converter
+function ccRun(mode){
+  const t = document.getElementById('cc-input').value;
+  let out = t;
+
+  if(mode === 'upper') out = t.toUpperCase();
+  if(mode === 'lower') out = t.toLowerCase();
+  if(mode === 'title')
+    out = t.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+
+  if(mode === 'sentence')
+    out = t.toLowerCase()
+      .replace(/(^\s*\w|[.!?]\s*\w)/g, c => c.toUpperCase());
+
+  document.getElementById('cc-out').textContent = out;
+}
+
+// Slug generator
+function sgRun(){
+  const t = document.getElementById('sg-input').value;
+
+  const slug = t.toLowerCase().trim()
+    .replace(/[^a-z0-9\s-]/g,'')
+    .replace(/\s+/g,'-')
+    .replace(/-+/g,'-');
+
+  document.getElementById('sg-out').textContent =
+    slug || '(type a title above)';
+}
+
+// Password generator
+function pwRun(){
+  const len = +document.getElementById('pw-len').value;
+  const sym = document.getElementById('pw-sym').checked;
+  const num = document.getElementById('pw-num').checked;
+
+  let chars =
+    'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+  if(num) chars += '0123456789';
+  if(sym) chars += '!@#$%^&*()_+-=[]{}';
+
+  let pw = '';
+  const arr = new Uint32Array(len);
+
+  crypto.getRandomValues(arr);
+
+  for(let i=0;i<len;i++){
+    pw += chars[arr[i] % chars.length];
+  }
+
+  document.getElementById('pw-out').textContent = pw;
+}
+
+show('words');
