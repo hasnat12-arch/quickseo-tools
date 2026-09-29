@@ -9,62 +9,6 @@
   "description": "Free online SEO and writing tools including word counter, keyword density checker, meta tag checker, case converter, slug generator and password generator."
 }
 </script>
-<style>
-/* Smooth page animation */
-body {
-  animation: pageFade 0.7s ease-out;
-}
-
-@keyframes pageFade {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Tool cards animation */
-main > section {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-main > section:hover {
-  transform: translateY(-5px);
-}
-
-/* Buttons */
-button,
-a {
-  transition: transform 0.25s ease, opacity 0.25s ease;
-}
-
-button:hover {
-  transform: translateY(-2px);
-}
-
-/* Headings */
-h1, h2, h3 {
-  transition: transform 0.3s ease;
-}
-
-h2:hover,
-h3:hover {
-  transform: translateX(4px);
-}
-
-/* Respect reduced-motion settings */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation: none !important;
-    transition: none !important;
-  }
-}
-</style>
 </head>
   <script type="application/ld+json">
 {
